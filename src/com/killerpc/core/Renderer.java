@@ -1,44 +1,41 @@
 package com.killerpc.core;
 
-import java.awt.image.DataBufferByte;
 
-import com.killerpc.core.gfx.Color;
+import java.awt.image.DataBufferInt;
+
 import com.killerpc.core.gfx.Image;
 
 public class Renderer {
 	
 	private int width, height;
-	private byte[] pixels;
+	private int[] pixels;
 	
 	public Renderer(GameContainer gc){
 		this.width = gc.getWidth();
 		this.height= gc.getHeight();
-		this.pixels = ((DataBufferByte)gc.getWindow().getImage().getRaster().getDataBuffer()).getData();
+		this.pixels = ((DataBufferInt)gc.getWindow().getImage().getRaster().getDataBuffer()).getData();
 	}
 	
-	public void setPixel(int x, int y,Color c){
-		if((x < 0 || x >= width || y < 0 || y >= height)|| c.getA()==0)
+	public void setPixel(int x, int y, int color){
+		if(x < 0 || x >= width || y < 0 || y >= height)
 			return;
-		int index = (x+y*width)*4;
-		pixels[index]=(byte)((c.getA()*255f)+ 0.5f);
-		pixels[index+1]=(byte)((c.getB()*255f)+ 0.5f);
-		pixels[index+2]=(byte)((c.getG()*255f)+ 0.5f);
-		pixels[index+3]=(byte)((c.getR()*255f)+ 0.5f);
+		pixels[x+y*width]= color;
+		
 	}
 	
 	
 	public void clear(){
 		for (int x=0; x<width; x++){
 			for(int y=0; y< height; y++){
-				setPixel(x, y,Color.BLACK);
+				setPixel(x, y,0xff000000);
 			}
 		}
 	}
 	
 	public void drawImage(Image image, int offX, int offY){
-		for (int x=0; x<image.width; x++){
-			for(int y=0; y< image.height; y++){
-				setPixel(x+offX, y+offY,image.pixels[x+y*image.width]);
+		for (int x=0; x<image.getWidth(); x++){
+			for(int y=0; y< image.getHeight(); y++){
+				setPixel(x+offX, y+offY,image.getPixels()[x+y*image.getWidth()]);
 			}
 		}
 	}

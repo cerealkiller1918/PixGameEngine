@@ -3,12 +3,14 @@ package com.killerpc.core;
 
 import java.awt.image.DataBufferInt;
 
-import com.killerpc.core.gfx.Image;
+import com.killerpc.core.fx.Font;
+import com.killerpc.core.fx.Image;
 
 public class Renderer {
 	
 	private int width, height;
 	private int[] pixels;
+	private Font font = Font.STANDARD;
 	
 	public Renderer(GameContainer gc){
 		this.width = gc.getWidth();
@@ -17,9 +19,27 @@ public class Renderer {
 	}
 	
 	public void setPixel(int x, int y, int color){
-		if(x < 0 || x >= width || y < 0 || y >= height)
+		if((x < 0 || x >= width || y < 0 || y >= height)|| color == 0xffff00ff)
 			return;
 		pixels[x+y*width]= color;
+		
+	}
+	
+	public void drawString(String text, int color, int offX, int offY){
+		
+		text = text.toUpperCase();
+		int offset=0;
+		for(int i = 0; i < text.length(); i++){
+			int unicode = text.codePointAt(i) - 32;
+			
+			for (int x = 0; x < font.getWidths()[unicode]; x++){
+				for(int y = 1; y < font.getImage().getHeight(); y++){
+					if(font.getImage().getPixels()[(x+font.getOffsets()[unicode])+y*font.getImage().getWidth()] == 0xffffffff)
+						setPixel(x+offX+offset, y+offY-1, color );
+				}
+			}
+			offset+= font.getWidths()[unicode];
+		}
 		
 	}
 	

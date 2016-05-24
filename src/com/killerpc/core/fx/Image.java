@@ -1,4 +1,4 @@
-package com.killerpc.core.gfx;
+package com.killerpc.core.fx;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;

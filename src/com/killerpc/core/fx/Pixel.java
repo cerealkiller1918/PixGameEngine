@@ -1,4 +1,4 @@
-package com.killerpc.core.gfx;
+package com.killerpc.core.fx;
 
 public class Pixel {
 	

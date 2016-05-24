@@ -8,6 +8,8 @@ public class GameContainer implements Runnable{
 	private Renderer renderer;
 	private Input input;
 	
+	private boolean showFPS = false;
+	private int fps =0;
 	private boolean isRunning = false;
 	private int width =320, height = 240;
 	private int scale = 2;
@@ -68,6 +70,9 @@ public class GameContainer implements Runnable{
 			if(render){
 			renderer.clear();
 			game.render(this, renderer);
+			if(showFPS){
+				renderer.drawString("FPS "+fps, 0xffffff00, 0, 0);
+			}
 			window.update();
 			
 			frames++;
@@ -76,6 +81,7 @@ public class GameContainer implements Runnable{
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				System.out.println("Ticks " + updates + " | FPS " + frames);
+				fps = frames;
 				updates = 0;
 				frames = 0;
 			}
@@ -131,5 +137,10 @@ public class GameContainer implements Runnable{
 	public Window getWindow() {
 		return window;
 	}
+
+	public void setShowFPS(boolean showFPS) {
+		this.showFPS = showFPS;
+	}
+
 
 }

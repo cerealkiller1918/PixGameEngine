@@ -6,6 +6,8 @@ public class GameContainer implements Runnable{
 	private AbstractGame game;
 	private Window window;
 	private Renderer renderer;
+	private Input input;
+	
 	private boolean isRunning = false;
 	private int width =320, height = 240;
 	private int scale = 2;
@@ -24,6 +26,7 @@ public class GameContainer implements Runnable{
 		//Initialize engine components
 		window = new Window(this);
 		renderer = new Renderer(this);
+		input = new Input(this);
 		
 		thread = new Thread(this);
 		thread.run();
@@ -55,6 +58,7 @@ public class GameContainer implements Runnable{
 			lastTime = now;
 			if (delta >= 1) {
 				game.update(this, (float)delta);
+				input.update();
 				render = true;
 				updates++;
 				delta--;

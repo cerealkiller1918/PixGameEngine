@@ -14,21 +14,32 @@ public class Game extends AbstractGame{
 
 	public static void main(String[] args) {
 		GameContainer gc = new GameContainer(new Game());
+		gc.setScale(2);
 		gc.start();
 
 	}
-
+	float x =0;
+	float y =0;
 	@Override
 	public void update(GameContainer gc, float dt) {
-		if(Input.isKeyPressed(KeyEvent.VK_A)){
-			System.out.println("Pressed A");
+		if(Input.isKey(KeyEvent.VK_A)||Input.isKey(KeyEvent.VK_LEFT)){
+			x-= dt;
+		}
+		if(Input.isKey(KeyEvent.VK_D)|| Input.isKey(KeyEvent.VK_RIGHT)){
+			x+=dt;
+		}
+		if(Input.isKey(KeyEvent.VK_W)|| Input.isKey(KeyEvent.VK_UP)){
+			y-=dt;
+		}
+		if(Input.isKey(KeyEvent.VK_S)|| Input.isKey(KeyEvent.VK_DOWN)){
+			y+=dt;
 		}
 		
 	}
 
 	@Override
 	public void render(GameContainer gc, Renderer r) {
-		r.drawImage(image, 50, 50);
+		r.drawImage(image, (int)x, (int) y);
 		
 	}
 

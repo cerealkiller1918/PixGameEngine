@@ -6,8 +6,11 @@ import com.killerpc.core.AbstractGame;
 import com.killerpc.core.GameContainer;
 import com.killerpc.core.Input;
 import com.killerpc.core.Renderer;
+import com.killerpc.core.gfx.Image;
 
 public class Game extends AbstractGame{
+	
+	private Image image = new Image("/test.png");
 
 	public static void main(String[] args) {
 		GameContainer gc = new GameContainer(new Game());
@@ -25,7 +28,7 @@ public class Game extends AbstractGame{
 
 	@Override
 	public void render(GameContainer gc, Renderer r) {
-		// TODO Auto-generated method stub
+		r.drawImage(image, 50, 50);
 		
 	}
 

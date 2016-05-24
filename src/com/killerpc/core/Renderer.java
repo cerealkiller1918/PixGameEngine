@@ -3,6 +3,7 @@ package com.killerpc.core;
 import java.awt.image.DataBufferByte;
 
 import com.killerpc.core.gfx.Color;
+import com.killerpc.core.gfx.Image;
 
 public class Renderer {
 	
@@ -30,6 +31,14 @@ public class Renderer {
 		for (int x=0; x<width; x++){
 			for(int y=0; y< height; y++){
 				setPixel(x, y,Color.BLACK);
+			}
+		}
+	}
+	
+	public void drawImage(Image image, int offX, int offY){
+		for (int x=0; x<image.width; x++){
+			for(int y=0; y< image.height; y++){
+				setPixel(x+offX, y+offY,image.pixels[x+y*image.width]);
 			}
 		}
 	}

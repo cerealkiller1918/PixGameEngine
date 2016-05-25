@@ -8,6 +8,8 @@ public class GameContainer implements Runnable{
 	private Renderer renderer;
 	private Input input;
 	
+	private Runtime runtime = Runtime.getRuntime();
+	private boolean debugMode = false;
 	private boolean showFPS = false;
 	private int fps =0;
 	private boolean isRunning = false;
@@ -80,7 +82,11 @@ public class GameContainer implements Runnable{
 
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				//System.out.println("Ticks " + updates + " | FPS " + frames);
+				if(debugMode){
+					long menory = runtime.totalMemory() - runtime.freeMemory();
+					long mega = menory/1048576;
+					System.out.println("Ticks " + updates + " | FPS " + frames + " | Menory "+mega+" MB "+menory+" bytes " +runtime.maxMemory()/1048576+" MB Total");
+				}
 				fps = frames;
 				updates = 0;
 				frames = 0;
@@ -140,6 +146,14 @@ public class GameContainer implements Runnable{
 
 	public void setShowFPS(boolean showFPS) {
 		this.showFPS = showFPS;
+	}
+
+	public boolean isDebugMode() {
+		return debugMode;
+	}
+
+	public void setDebugMode(boolean debugMode) {
+		this.debugMode = debugMode;
 	}
 
 

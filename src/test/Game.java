@@ -1,7 +1,6 @@
 package test;
 
 import java.awt.event.KeyEvent;
-
 import com.killerpc.core.AbstractGame;
 import com.killerpc.core.GameContainer;
 import com.killerpc.core.Input;
@@ -14,22 +13,23 @@ public class Game extends AbstractGame{
 	private Image image = new Image("/test.png");
 	private SoundClip clip1 = new SoundClip("/coin pickup.wav");
 	private SoundClip clip2 = new SoundClip("/War Machine.wav");
+	
 
 	public static void main(String[] args) {
 		GameContainer gc = new GameContainer(new Game());
 		gc.setWidth(200);
 		gc.setHeight(150);
 		gc.setScale(4);
+		gc.setDebugMode(true);
 		gc.setShowFPS(true);
 		gc.start();
-
+		
 	}
 	float x =0;
 	float y =0;
-	int v = 50;
+
 	@Override
 	public void update(GameContainer gc, float dt) {
-		
 		if (Input.isKeyReleased(KeyEvent.VK_Z)){
 			clip1.stop();
 			clip2.stop();

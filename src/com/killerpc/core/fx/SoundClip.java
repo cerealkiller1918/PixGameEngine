@@ -79,7 +79,6 @@ public class SoundClip {
 	public void pause(){
 		if(clip.isRunning() && !ifPaused){
 			frame = clip.getFramePosition();
-			System.out.println(frame);
 			clip.stop();
 			ifPaused = true;
 		}

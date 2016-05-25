@@ -12,6 +12,8 @@ public class SoundClip {
 	
 	private Clip clip;
 	private FloatControl gainControl;
+	private int frame =0;
+	private boolean ifPaused = false;
 	
 	public SoundClip(String path){
 		
@@ -72,6 +74,24 @@ public class SoundClip {
 	
 	public void setVolume(float value){
 		gainControl.setValue(value);
+	}
+	
+	public void pause(){
+		if(clip.isRunning() && !ifPaused){
+			frame = clip.getFramePosition();
+			System.out.println(frame);
+			clip.stop();
+			ifPaused = true;
+		}
+		else if(!clip.isRunning() && ifPaused){
+			clip.setFramePosition(frame);
+			clip.start();
+			ifPaused = false;
+		}
+	}
+	
+	public boolean isRunning(){
+		return clip.isRunning();
 	}
 
 }

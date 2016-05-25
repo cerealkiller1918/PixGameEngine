@@ -12,7 +12,8 @@ import com.killerpc.core.fx.SoundClip;
 public class Game extends AbstractGame{
 	
 	private Image image = new Image("/test.png");
-	private SoundClip clip = new SoundClip("/coin pickup.wav");
+	private SoundClip clip1 = new SoundClip("/coin pickup.wav");
+	private SoundClip clip2 = new SoundClip("/War Machine.wav");
 
 	public static void main(String[] args) {
 		GameContainer gc = new GameContainer(new Game());
@@ -25,14 +26,22 @@ public class Game extends AbstractGame{
 	}
 	float x =0;
 	float y =0;
+	int v = 50;
 	@Override
 	public void update(GameContainer gc, float dt) {
 		
 		if (Input.isKeyReleased(KeyEvent.VK_Z)){
-			clip.play();
+			clip1.stop();
+			clip2.stop();
 		}
-		if (Input.isKeyReleased(KeyEvent.VK_1)){
-			clip.stop();
+		if (Input.isKeyPressed(KeyEvent.VK_1)){
+			clip1.play();
+		}
+		if (Input.isKeyPressed(KeyEvent.VK_2)){
+			clip2.play();
+		}
+		if (Input.isKeyPressed(KeyEvent.VK_P)){
+			clip2.pause();
 		}
 		if(Input.isKey(KeyEvent.VK_A)||Input.isKey(KeyEvent.VK_LEFT)){
 			x-= dt;

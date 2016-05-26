@@ -17,11 +17,13 @@ public class Game extends AbstractGame{
 
 	public static void main(String[] args) {
 		GameContainer gc = new GameContainer(new Game());
-		gc.setWidth(200);
-		gc.setHeight(150);
-		gc.setScale(4);
+		gc.setWidth(320);
+		gc.setHeight(240);
+		gc.setScale(2);
 		gc.setDebugMode(true);
 		gc.setShowFPS(true);
+		gc.setAllWaysOnTop(true);
+		gc.setFullScreen(true);
 		gc.start();
 		
 	}
@@ -30,6 +32,9 @@ public class Game extends AbstractGame{
 
 	@Override
 	public void update(GameContainer gc, float dt) {
+		if (Input.isKeyPressed(KeyEvent.VK_ESCAPE)){
+			gc.stop();
+		}
 		if (Input.isKeyReleased(KeyEvent.VK_Z)){
 			clip1.stop();
 			clip2.stop();

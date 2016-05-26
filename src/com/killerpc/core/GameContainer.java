@@ -16,7 +16,10 @@ public class GameContainer implements Runnable{
 	private int width =320, height = 240;
 	private int scale = 2;
 	private String Title = "Pix Engine V1.0";
+	private boolean isAllWaysOnTop = false;
+	private boolean isFullScreen = false;
 	
+
 	public GameContainer(AbstractGame game)
 	{
 		this.game = game;
@@ -32,6 +35,10 @@ public class GameContainer implements Runnable{
 		renderer = new Renderer(this);
 		input = new Input(this);
 		
+		
+		if(isFullScreen){
+			window.setFullScreen();
+		}
 		thread = new Thread(this);
 		thread.run();
 	}
@@ -154,6 +161,22 @@ public class GameContainer implements Runnable{
 
 	public void setDebugMode(boolean debugMode) {
 		this.debugMode = debugMode;
+	}
+
+	public boolean isAllWaysOnTop() {
+		return isAllWaysOnTop;
+	}
+
+	public void setAllWaysOnTop(boolean isAllWaysOnTop) {
+		this.isAllWaysOnTop = isAllWaysOnTop;
+	}
+
+	public boolean isFullScreen() {
+		return isFullScreen;
+	}
+
+	public void setFullScreen(boolean isFullScreen) {
+		this.isFullScreen = isFullScreen;
 	}
 
 

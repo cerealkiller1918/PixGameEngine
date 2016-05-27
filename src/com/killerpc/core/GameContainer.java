@@ -35,10 +35,6 @@ public class GameContainer implements Runnable{
 		renderer = new Renderer(this);
 		input = new Input(this);
 		
-		
-		if(isFullScreen){
-			window.setFullScreen();
-		}
 		thread = new Thread(this);
 		thread.run();
 	}

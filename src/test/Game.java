@@ -1,5 +1,6 @@
 package test;
 
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import com.killerpc.core.AbstractGame;
 import com.killerpc.core.GameContainer;
@@ -17,9 +18,14 @@ public class Game extends AbstractGame{
 
 	public static void main(String[] args) {
 		GameContainer gc = new GameContainer(new Game());
-		gc.setWidth(320);
-		gc.setHeight(240);
-		gc.setScale(2);
+		Toolkit tk =Toolkit.getDefaultToolkit();
+		double width = tk.getScreenSize().getWidth();
+		double height = tk.getScreenSize().getHeight();
+		double scale1 = width/gc.getWidth();
+		double scale2 = height/gc.getHeight();
+		double scale = (scale1+scale2)/2;
+		
+		gc.setScale((int)scale-1);
 		gc.setDebugMode(true);
 		gc.setShowFPS(true);
 		gc.setAllWaysOnTop(true);

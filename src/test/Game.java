@@ -14,6 +14,7 @@ public class Game extends AbstractGame{
 	private Image image = new Image("/test.png");
 	private SoundClip clip1 = new SoundClip("/coin pickup.wav");
 	private SoundClip clip2 = new SoundClip("/War Machine.wav");
+	private static String iconFileName = "/icon.png";
 	
 
 	public static void main(String[] args) {
@@ -29,7 +30,8 @@ public class Game extends AbstractGame{
 		gc.setDebugMode(true);
 		gc.setShowFPS(true);
 		gc.setAllWaysOnTop(true);
-		gc.setFullScreen(true);
+		gc.setFullScreen(false);
+		gc.setIconFileName(iconFileName);
 		gc.start();
 		
 	}

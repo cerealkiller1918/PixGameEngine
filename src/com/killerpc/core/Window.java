@@ -4,9 +4,9 @@ import java.awt.BorderLayout;
 import java.awt.Canvas;
 import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Toolkit;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 
@@ -23,11 +23,12 @@ public class Window {
 		image =new BufferedImage(gc.getWidth(), gc.getHeight(), BufferedImage.TYPE_INT_RGB);
 		canvas = new Canvas();
 		Dimension s = new Dimension(gc.getWidth()* gc.getScale(), gc.getHeight()* gc.getScale());
-
+		ImageIcon icon = new ImageIcon(gc.getIconFileName());
 		canvas.setPreferredSize(s);
 		canvas.setMaximumSize(s);
 		canvas.setMinimumSize(s);
 		frame = new JFrame(gc.getTitle());
+		frame.setIconImage(icon.getImage());
 		frame.setUndecorated(gc.isFullScreen());
 		frame.setAlwaysOnTop(gc.isAllWaysOnTop());
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

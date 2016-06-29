@@ -1,5 +1,7 @@
 package com.killerpc.core;
 
+import com.killerpc.debuging.Debug;
+
 public class GameContainer implements Runnable {
 
 	private Thread thread;
@@ -7,9 +9,9 @@ public class GameContainer implements Runnable {
 	private Window window;
 	private Renderer renderer;
 	private Input input;
+	public Debug debug;
 
 	private Runtime runtime = Runtime.getRuntime();
-	private boolean debugMode = false;
 	private boolean showFPS = false;
 	private int fps = 0;
 	private boolean isRunning = false;
@@ -32,15 +34,21 @@ public class GameContainer implements Runnable {
 		window = new Window(this);
 		renderer = new Renderer(this);
 		input = new Input(this);
-
+		debug = new Debug();
+		debug.setDebugMode(true);
+		debug.setConsoleMode(true);
+		debug.setLoggerMode(true);
+		
 		thread = new Thread(this);
 		thread.run();
 	}
+	
+	
 
 	public void stop() {
 		if (!isRunning)
 			return;
-
+		
 		isRunning = false;
 	}
 
@@ -54,9 +62,10 @@ public class GameContainer implements Runnable {
 		int frames = 0;
 		long timer = System.currentTimeMillis();
 
-		while (isRunning) {
+		while (isRunning && window.isWindowOpen()) {
 			boolean render = true;
 			long now = System.nanoTime();
+			
 			delta += (now - lastTime) / ns;
 			lastTime = now;
 			if (delta >= 1) {
@@ -67,7 +76,7 @@ public class GameContainer implements Runnable {
 				delta--;
 
 			}
-
+			
 			if (render) {
 				renderer.clear();
 				game.render(this, renderer);
@@ -81,23 +90,23 @@ public class GameContainer implements Runnable {
 
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
-				if (debugMode) {
-					long menory = runtime.totalMemory() - runtime.freeMemory();
-					long mega = menory / 1048576;
-					System.out.println("Ticks " + updates + " | FPS " + frames + " | Memory " + mega + " MB " + menory
-							+ " bytes " + runtime.maxMemory() / 1048576 + " MB Total");
-				}
+				debug.setDebugData(updates, frames, runtime.totalMemory() - runtime.freeMemory());
+				debug.run();
 				fps = frames;
 				updates = 0;
 				frames = 0;
 			}
 
 		}
+		debug.setError("Closing");
+		debug.run();
 		cleanUp();
 	}
 
 	private void cleanUp() {
 		window.cleanUp();
+		debug.Logercleanup();
+		//some thing at this point is still running
 
 	}
 
@@ -141,13 +150,6 @@ public class GameContainer implements Runnable {
 		this.showFPS = showFPS;
 	}
 
-	public boolean isDebugMode() {
-		return debugMode;
-	}
-
-	public void setDebugMode(boolean debugMode) {
-		this.debugMode = debugMode;
-	}
 
 	public boolean isAllWaysOnTop() {
 		return isAllWaysOnTop;

@@ -8,6 +8,7 @@ import com.killerpc.core.Input;
 import com.killerpc.core.Renderer;
 import com.killerpc.core.fx.Image;
 import com.killerpc.core.fx.SoundClip;
+import com.killerpc.errorMessage.ErrorMessage;
 
 public class Game extends AbstractGame{
 	
@@ -15,6 +16,7 @@ public class Game extends AbstractGame{
 	private SoundClip clip1 = new SoundClip("/coin pickup.wav");
 	private SoundClip clip2 = new SoundClip("/War Machine.wav");
 	private static String iconFileName = "/icon.png";
+	private ErrorMessage error = new ErrorMessage();
 	
 
 	public static void main(String[] args) {
@@ -27,7 +29,6 @@ public class Game extends AbstractGame{
 		double scale = (scale1+scale2)/2;
 		
 		gc.setScale((int)scale-1);
-		gc.setDebugMode(true);
 		gc.setShowFPS(true);
 		gc.setAllWaysOnTop(true);
 		gc.setFullScreen(false);
@@ -67,6 +68,9 @@ public class Game extends AbstractGame{
 		}
 		if(Input.isKey(KeyEvent.VK_S)|| Input.isKey(KeyEvent.VK_DOWN)){
 			y+=dt;
+		}
+		if (Input.isKeyPressed(KeyEvent.VK_T)){
+			error.showErrorMessage("Test");
 		}
 		
 	}

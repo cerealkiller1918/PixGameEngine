@@ -31,7 +31,7 @@ public class Window {
 		frame.setIconImage(icon.getImage());
 		frame.setUndecorated(gc.isFullScreen());
 		frame.setAlwaysOnTop(gc.isAllWaysOnTop());
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		frame.setLayout(new BorderLayout());
 		frame.add(canvas, BorderLayout.CENTER);
 		frame.pack();
@@ -57,7 +57,6 @@ public class Window {
 		bs.dispose();
 		image.flush();
 		frame.dispose();
-		
 	}
 
 	public Canvas getCanvas() {
@@ -66,6 +65,10 @@ public class Window {
 
 	public BufferedImage getImage() {
 		return image;
+	}
+	
+	public boolean isWindowOpen(){
+		return frame.isVisible();
 	}
 
 }

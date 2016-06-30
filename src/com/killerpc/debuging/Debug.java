@@ -50,6 +50,9 @@ public class Debug {
 			startLogger = false;
 			}
 			log.println("Ticks "+ Ticks + " | FPS " + FPS + " | " + dateFormat.format(new Date()));
+			if(error != null){
+				log.println(error);
+			}
 		} catch (FileNotFoundException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -58,9 +61,7 @@ public class Debug {
 			e.printStackTrace();
 		}
 		
-		if(error != null){
-			//Log other Data
-		}
+		
 	}
 	
 	private void display(){

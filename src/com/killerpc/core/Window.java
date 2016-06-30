@@ -56,7 +56,9 @@ public class Window {
 		g.dispose();
 		bs.dispose();
 		image.flush();
-		frame.dispose();
+		if(frame.isVisible()){
+			frame.dispose();
+		}
 	}
 
 	public Canvas getCanvas() {

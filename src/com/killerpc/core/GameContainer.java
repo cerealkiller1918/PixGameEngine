@@ -9,7 +9,7 @@ public class GameContainer implements Runnable {
 	private Window window;
 	private Renderer renderer;
 	private Input input;
-	public Debug debug;
+	private Debug debug;
 
 	private Runtime runtime = Runtime.getRuntime();
 	private boolean showFPS = false;
@@ -106,7 +106,7 @@ public class GameContainer implements Runnable {
 	private void cleanUp() {
 		window.cleanUp();
 		debug.Logercleanup();
-		//some thing at this point is still running
+		
 
 	}
 

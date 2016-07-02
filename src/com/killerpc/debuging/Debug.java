@@ -98,6 +98,7 @@ public class Debug {
 	}
 	public void setError(String error) {
 		this.error = error;
+		run();
 	}
 	
 

@@ -7,6 +7,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.killerpc.core.ComputerMontor;
+
 public class Debug {
 	
 	private boolean debugMode = false;
@@ -47,6 +49,7 @@ public class Debug {
 		try {
 			if (startLogger){
 			log = new PrintWriter(fileDateFormat.format(new Date())+".log","UTF-8");
+			log.println(new ComputerMontor().getSystemInfo());
 			startLogger = false;
 			}
 			log.println("Ticks "+ Ticks + " | FPS " + FPS + " | " + dateFormat.format(new Date()));
@@ -78,6 +81,7 @@ public class Debug {
 		this.Memory = Memory;
 		this.FPS = FPS;
 		this.Ticks = Ticks;
+		run();
 	}
 	
 	public void setDebugMode(boolean debugMode) {

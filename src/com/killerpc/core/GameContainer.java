@@ -38,7 +38,6 @@ public class GameContainer implements Runnable {
 		debug.setDebugMode(true);
 		debug.setConsoleMode(true);
 		debug.setLoggerMode(true);
-		
 		thread = new Thread(this);
 		thread.run();
 	}
@@ -91,7 +90,6 @@ public class GameContainer implements Runnable {
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				debug.setDebugData(updates, frames, runtime.totalMemory() - runtime.freeMemory());
-				debug.run();
 				fps = frames;
 				updates = 0;
 				frames = 0;
@@ -99,7 +97,6 @@ public class GameContainer implements Runnable {
 
 		}
 		debug.setError("Closing");
-		debug.run();
 		cleanUp();
 	}
 

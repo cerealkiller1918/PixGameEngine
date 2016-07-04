@@ -26,7 +26,9 @@ public class Collider extends Component{
 	@Override
 	public void render(GameContainer gc, Renderer r) {
 		// TODO Auto-generated method stub
-		
+		//jfxr
+		//sfxr
+		//bfxr
 	}
 	
 	public void collision(GameObject object){

@@ -28,5 +28,40 @@ public class Collider extends Component{
 		// TODO Auto-generated method stub
 		
 	}
+	
+	public void collision(GameObject object){
+		this.object.componentEvent(tag, object);
+	}
+	public GameObject getObject() {
+		return object;
+	}
+	public void setObject(GameObject object) {
+		this.object = object;
+	}
+	public float getX() {
+		return x;
+	}
+	public void setX(float x) {
+		this.x = x;
+	}
+	public float getY() {
+		return y;
+	}
+	public void setY(float y) {
+		this.y = y;
+	}
+	public float gethW() {
+		return hW;
+	}
+	public void sethW(float hW) {
+		this.hW = hW;
+	}
+	public float gethH() {
+		return hH;
+	}
+	public void sethH(float hH) {
+		this.hH = hH;
+	}
+	
 
 }

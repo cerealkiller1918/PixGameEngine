@@ -29,7 +29,7 @@ public abstract class GameObject {
 		}
 	}
 	
-	public abstract void componentEvent(String name, GameContainer gc);
+	public abstract void componentEvent(String name, GameObject object);
 	public abstract void dispose();
 	
 	public void addComponent(Component c){

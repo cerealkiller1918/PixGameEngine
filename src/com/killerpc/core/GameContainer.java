@@ -1,5 +1,6 @@
 package com.killerpc.core;
 
+import com.killerpc.core.components.Physics;
 import com.killerpc.debuging.Debug;
 import com.killerpc.debuging.DebugWindow;
 
@@ -10,6 +11,7 @@ public class GameContainer implements Runnable {
 	private Window window;
 	private Renderer renderer;
 	private Input input;
+	private Physics physics;
 	private Debug debug = new Debug();
 	private DebugWindow debugWindow;
 
@@ -23,6 +25,10 @@ public class GameContainer implements Runnable {
 	private boolean isAllWaysOnTop = false;
 	private boolean isFullScreen = false;
 	private String iconFileName;
+	private boolean lockFrameRate = false;
+	private boolean lightEnable = false;
+	private boolean dynamicLights = false;
+	private boolean clearScreen = false;
 
 	public GameContainer(AbstractGame game) {
 		this.game = game;
@@ -190,4 +196,54 @@ public class GameContainer implements Runnable {
 		debug.setLoggerMode(mode);
 	}
 
+	public Physics getPhysics() {
+		return physics;
+	}
+
+	public void setPhysics(Physics physics) {
+		this.physics = physics;
+	}
+
+	public boolean isLockFrameRate() {
+		return lockFrameRate;
+	}
+
+	public void setLockFrameRate(boolean lockFrameRate) {
+		this.lockFrameRate = lockFrameRate;
+	}
+
+	public boolean isLightEnable() {
+		return lightEnable;
+	}
+
+	public void setLightEnable(boolean lightEnable) {
+		this.lightEnable = lightEnable;
+	}
+
+	public boolean isDynamicLights() {
+		return dynamicLights;
+	}
+
+	public void setDynamicLights(boolean dynamicLights) {
+		this.dynamicLights = dynamicLights;
+	}
+
+	public boolean isClearScreen() {
+		return clearScreen;
+	}
+
+	public void setClearScreen(boolean clearScreen) {
+		this.clearScreen = clearScreen;
+	}
+	public AbstractGame getGame(){
+		return game;
+	}
+
+	public void setGame(AbstractGame game){
+		this.game = game;
+	}
+	
+	public Input getInput(){
+		return input;
+	}
 }

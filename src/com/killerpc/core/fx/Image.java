@@ -8,6 +8,7 @@ public class Image {
 	
 	private int width, height;
 	private int[] pixels;
+	private ShadowType shadowType = ShadowType.NONE;
 	
 	public Image(String path){
 		
@@ -41,6 +42,9 @@ public class Image {
 
 	public int[] getPixels() {
 		return pixels;
+	}
+	public ShadowType getShadowType() {
+		return shadowType;
 	}
 	
 

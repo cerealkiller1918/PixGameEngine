@@ -73,6 +73,7 @@ public class Debug {
 	
 	
 	public void Logercleanup(){
+		if(startLogger)return;
 		log.flush();
 		log.close();
 	}
@@ -99,6 +100,18 @@ public class Debug {
 	public void setError(String error) {
 		this.error = error;
 		run();
+	}
+
+	public boolean isDebugMode() {
+		return debugMode;
+	}
+
+	public boolean isConsoleMode() {
+		return consoleMode;
+	}
+
+	public boolean isLoggerMode() {
+		return loggerMode;
 	}
 	
 

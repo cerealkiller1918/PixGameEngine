@@ -18,7 +18,6 @@ public class Game extends AbstractGame{
 	private static String iconFileName = "/icon.png";
 	private ErrorMessage error = new ErrorMessage();
 	
-	
 
 	public static void main(String[] args) {
 		GameContainer gc = new GameContainer(new Game());
@@ -30,6 +29,8 @@ public class Game extends AbstractGame{
 		double scale = (scale1+scale2)/2;
 		gc.setScale((int)scale-1);
 		gc.setShowFPS(true);
+		gc.setDebugMode(true);
+		gc.setLoggerMode(true);
 		gc.setAllWaysOnTop(true);
 		gc.setFullScreen(false);
 		gc.setIconFileName(iconFileName);
@@ -73,6 +74,15 @@ public class Game extends AbstractGame{
 		if (Input.isKeyPressed(KeyEvent.VK_T)){
 			error.showErrorMessage("Test");
 		}
+		if(Input.isKeyPressed(KeyEvent.VK_Y)){
+			gc.startDebugWindow();
+		}
+		if(Input.isKeyPressed(KeyEvent.VK_M)){
+			gc.setConsoleMode(true);
+		}
+		if(Input.isKeyPressed(KeyEvent.VK_N)){
+			gc.setConsoleMode(false);
+		}
 		
 	}
 
@@ -80,6 +90,12 @@ public class Game extends AbstractGame{
 	public void render(GameContainer gc, Renderer r) {
 		r.drawImage(image, (int)x, (int) y);
 		
+		
+	}
+
+	@Override
+	public void init(GameContainer gc) {
+		// TODO Auto-generated method stub
 		
 	}
 

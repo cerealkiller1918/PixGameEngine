@@ -1,6 +1,7 @@
 package com.killerpc.core;
 
 import com.killerpc.debuging.Debug;
+import com.killerpc.debuging.DebugWindow;
 
 public class GameContainer implements Runnable {
 
@@ -9,7 +10,8 @@ public class GameContainer implements Runnable {
 	private Window window;
 	private Renderer renderer;
 	private Input input;
-	private Debug debug;
+	private Debug debug = new Debug();
+	private DebugWindow debugWindow;
 
 	private Runtime runtime = Runtime.getRuntime();
 	private boolean showFPS = false;
@@ -34,12 +36,11 @@ public class GameContainer implements Runnable {
 		window = new Window(this);
 		renderer = new Renderer(this);
 		input = new Input(this);
-		debug = new Debug();
-		debug.setDebugMode(true);
-		debug.setConsoleMode(true);
-		debug.setLoggerMode(true);
+		
+		debugWindow = new DebugWindow();
 		thread = new Thread(this);
 		thread.run();
+		
 	}
 	
 	
@@ -60,6 +61,7 @@ public class GameContainer implements Runnable {
 		int updates = 0;
 		int frames = 0;
 		long timer = System.currentTimeMillis();
+		
 
 		while (isRunning && window.isWindowOpen()) {
 			boolean render = true;
@@ -90,6 +92,8 @@ public class GameContainer implements Runnable {
 			if (System.currentTimeMillis() - timer > 1000) {
 				timer += 1000;
 				debug.setDebugData(updates, frames, runtime.totalMemory() - runtime.freeMemory());
+				debugWindow.update(updates, frames);
+				debugWindow.setDebugStates(debug.isDebugMode(), debug.isConsoleMode(), debug.isLoggerMode());
 				fps = frames;
 				updates = 0;
 				frames = 0;
@@ -103,6 +107,7 @@ public class GameContainer implements Runnable {
 	private void cleanUp() {
 		window.cleanUp();
 		debug.Logercleanup();
+		debugWindow.cleanup();
 		
 
 	}
@@ -170,6 +175,19 @@ public class GameContainer implements Runnable {
 
 	public void setIconFileName(String iconFileName) {
 		this.iconFileName = iconFileName;
+	}
+	
+	public void startDebugWindow(){
+		debugWindow.Window();
+	}
+	public void setDebugMode(boolean mode){
+		debug.setDebugMode(mode);
+	}
+	public void setConsoleMode(boolean mode){
+		debug.setConsoleMode(mode);
+	}
+	public void setLoggerMode(boolean mode){
+		debug.setLoggerMode(mode);
 	}
 
 }

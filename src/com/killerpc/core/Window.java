@@ -53,11 +53,11 @@ public class Window {
 	
 	public void cleanUp(){
 		try{
-		g.dispose();
-		bs.dispose();
-		image.flush();
-		if(frame.isVisible()){
-			frame.dispose();
+			g.dispose();
+			bs.dispose();
+			image.flush();
+			if(frame.isVisible()){
+				frame.dispose();
 		}
 		}catch(Exception e){
 			
